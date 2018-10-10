@@ -1,0 +1,42 @@
+// Body
+$body-bg: #e6e6e6;
+$default-margin: 20px;
+$item-width: 400px;
+$animate: all .2s cubic-bezier(0,0,.58,1);
+
+// Colors
+$blue-1: #03a9f4;
+$blue-2: #29b6f6;
+$gray: #5B5B5B;
+
+// header
+$header-height: 65px;
+$sidenav-width: 250px;
+
+/* init */
+i{
+  color: #000;
+}
+// label focus color
+.input-field input[type=text]:focus + label,
+.input-field input[type=password]:focus + label{
+  color: $blue-1 !important; 
+}
+// label underline focus color
+.input-field input[type=text]:focus,
+.input-field input[type=password]:focus{
+  border-bottom: 1px solid #03a9f4 !important;
+  box-shadow: 0 1px 0 0 #03a9f4 !important;
+}
+// btn bgColor
+.btn{
+  margin: 0 0 0 0;
+  background-color: $blue-1;
+  &:hover{
+    background-color: $blue-2;
+  }
+}
+.user-img-0{
+  width: 50px;
+  height: 50px;
+}
