@@ -10,7 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 
-import { App, Home, Register, Login } from './containers';
+import { App, Home, Register, Login, Write } from './containers';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -22,6 +22,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/register" component={Register}/>
           <Route path="/login" component={Login}/>
+          <Route path="/write" component={Write}/>
           <Route path="/" component={Home}/>
         </Switch>
       </>

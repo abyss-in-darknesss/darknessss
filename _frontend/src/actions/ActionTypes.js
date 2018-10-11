@@ -7,5 +7,7 @@ export const AUTH_REGISTER_FAILURE = "AUTH_REGISTER_FAILURE";
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
 export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE";
+// Get status
+export const AUTH_GET_STATUS = "AUTH_GET_STATUS";
 // Logout
 export const AUTH_LOGOUT = "AUTH_LOGOUT";

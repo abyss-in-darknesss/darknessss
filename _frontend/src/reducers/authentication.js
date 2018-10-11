@@ -62,7 +62,14 @@ export default function authentication(state = initialState, action) {
           status: 'FAILURE'
         }
       });
-      
+  /* GET STATUS */
+    case types.AUTH_GET_STATUS:
+      return produce(state, draft => {
+        draft.status = {
+          isLoggedIn: true,
+          currentUser: action.username
+        }
+      })
   /* LOGOUT */
     case types.AUTH_LOGOUT:
       return produce(state, draft => {
