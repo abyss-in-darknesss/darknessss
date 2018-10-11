@@ -11,7 +11,7 @@ export const isPassword = (password) => {
 }
 
 // 디스플레이네임 유효 검사
-export const isDisplayName = (displayName) => {
+export const isUserName = (displayName) => {
   const regexp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/igm;
   return regexp.test(displayName);
 }
