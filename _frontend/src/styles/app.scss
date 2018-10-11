@@ -15,6 +15,7 @@ html, body {
 #root{
   display: flex;
 }
+
 header{
   position: relative;
   height: $header-height;
@@ -91,7 +92,7 @@ header{
       width: inherit;
       margin-bottom: 12px;
       text-align: start;
-      img{
+      &>a>img{
         margin: 0 0 0 0;
         display: block;
         width: 100%;
@@ -99,7 +100,7 @@ header{
       }
       .article-info{
         position: absolute;
-        padding: 15px;
+        padding: 20px;
         background:linear-gradient(rgba(36,38,38,0) 0,rgba(36,38,38,.75) 100%);
         z-index: 6;
         width: 100%;
@@ -118,7 +119,7 @@ header{
 }
 
 .auth {
-  width: $item-width;
+  width: $item-width*.9;
   margin: 15vh auto;
   text-align: center;
   a.logo {
@@ -138,12 +139,18 @@ header{
   .card {
     margin: $default-margin -5px auto;
     .row {
-      margin-bottom: 0px;
+      margin: $default-margin*1.5;
+      p {
+        font-size: 32px;
+        color: $gray;
+        margin-bottom: $default-margin*2;
+      }
       .email {
         margin-top: 0px;
       }
       .btn {
-        width: 90%;
+        margin-top: $default-margin;
+        width: 100%;
       }
     }
   }

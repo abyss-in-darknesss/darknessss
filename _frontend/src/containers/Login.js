@@ -12,7 +12,7 @@ class Login extends Component {
           // create session data
           const loginData = {
             isLoggedIn: true,
-            id: id
+            currentUser: id
           }
 
           document.cookie = 'key=' + btoa(JSON.stringify(loginData));

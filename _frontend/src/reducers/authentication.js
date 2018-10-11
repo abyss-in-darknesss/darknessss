@@ -10,7 +10,6 @@ const initialState = {
     error: -1
   },
   status: {
-    valid: false,
     isLoggedIn: false,
     currentUser: ''
   }
@@ -18,7 +17,7 @@ const initialState = {
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
-    /* REGISTER */
+  /* REGISTER */
     case types.AUTH_REGISTER:
       return produce(state, draft => {
         draft.register = {
@@ -39,7 +38,8 @@ export default function authentication(state = initialState, action) {
           error: action.error
         }
       });
-    /* LOGIN */
+
+  /* LOGIN */
     case types.AUTH_LOGIN:
     return produce(state, draft => {
       draft.login = {
@@ -53,7 +53,7 @@ export default function authentication(state = initialState, action) {
         };
         draft.status = {
           isLoggedIn: true,
-          currentUser: action.username
+          currentUser: action.email
         }
       });
     case types.AUTH_LOGIN_FAILURE:
@@ -62,25 +62,13 @@ export default function authentication(state = initialState, action) {
           status: 'FAILURE'
         }
       });
-    /* CHECK SESSIONS */
-    case types.AUTH_GET_STATUS:
-    return produce(state, draft => {
-      draft.status = {
-        isLoggedIn: true
-      }
-    });
-    case types.AUTH_GET_STATUS_SUCCESS:
-      return produce(state, draft =>{
-        draft.status = {
-          valid: true,
-          currentUser: action.email
-        }
-      });
-    case types.AUTH_GET_STATUS_FAILURE:
+      
+  /* LOGOUT */
+    case types.AUTH_LOGOUT:
       return produce(state, draft => {
         draft.status = {
-          valid: false,
-          isLoggedIn: false
+          isLoggedIn: false,
+          currentUser: ''
         }
       });
     default:

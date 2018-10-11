@@ -16,12 +16,12 @@ const logoutBtn = (
   <li><Link to="#" className="waves-effect waves-light btn">로그아웃</Link></li>
 )
 
-const Header = ({ handleNav, isSideNav, isLoggedIn }) => (
+const Header = ({ handleNav, isSideNav, isLoggedIn, username }) => (
   <header style={{width:`${isSideNav ? '250px' : '0'}`}}>
     <nav id="gnb">
       <div id="logo">
         <i className="material-icons"
-        style={!isSideNav ? {transform: 'rotate(90deg)'}:{}}
+        style={!isSideNav ? {transform: 'rotate(-90deg)'}:{}}
           onClick={handleNav}>menu</i>
         <Link to="/">EF</Link>
       </div>
@@ -35,7 +35,7 @@ const Header = ({ handleNav, isSideNav, isLoggedIn }) => (
           <div className="user-img-0">
             <img className="circle user-img-0" alt="user-profile" src="https://www.worldcrunch.com/assets/img/avatars/thumbnails/default-user-img-profile.jpg"/>
           </div>
-          <span id="nav-username"></span>
+          <span id="nav-username">{username}</span>
         </div>
       </li>
       <ul>

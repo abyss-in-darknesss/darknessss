@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 class Authentication extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    username: ''
   }
 
   handleChange = (e) => {
@@ -15,25 +16,26 @@ class Authentication extends Component {
   }
 
   handleKeyPress = (e) => {
-    if(e.charCode === 13) {
-      if(this.props.mode) {
+    if (e.charCode === 13) {
+      if (this.props.mode) {
         this.handleLogin();
-      }else {
+      } else {
         this.handleRegister();
       }
     }
   }
 
   handleRegister = () => {
-    const id = this.state.email;
-    const pw = this.state.password;
-
-    this.props.onRegister(id, pw).then(
+    const email = this.state.email;
+    const password = this.state.password;
+    const username = this.state.username;
+    this.props.onRegister(email, password, username).then(
       (result) => {
         if (!result) {
           this.setState({
-            id: '',
-            password: ''
+            email: '',
+            password: '',
+            username: ''
           })
         }
       }
@@ -46,9 +48,10 @@ class Authentication extends Component {
 
     this.props.onLogin(id, pw).then(
       (success) => {
-        if(!success) {
+        if (!success) {
           this.setState({
-            password: ''
+            email: '',
+            password: '',
           });
         }
       }
@@ -56,39 +59,34 @@ class Authentication extends Component {
   }
 
   render() {
-    const inputBoxes = (
-      <>
-        <div className="input-field email">
-          <label>email</label>
-          <input
-            name="email"
-            type="text"
-            className="validate"
-            onChange={this.handleChange}
-            value={this.state.email}
-            autoFocus={true}
-          />
-        </div>
-        <div className="input-field">
-          <label>Password</label>
-          <input
-            name="password"
-            type="password"
-            className="validate"
-            onChange={this.handleChange}
-            value={this.state.password}
-            onKeyPress={this.handleKeyPress}
-          />
-        </div>
-      </>
-    );
-
     const loginView = (
       <>
         <div className="card">
           <div className="card-content">
             <div className="row">
-              {inputBoxes}
+              <p>로그인</p>
+              <div className="input-field email">
+                <label>email</label>
+                <input
+                  name="email"
+                  type="text"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                  autoFocus={true}
+                />
+              </div>
+              <div className="input-field">
+                <label>Password</label>
+                <input
+                  name="password"
+                  type="password"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value={this.state.password}
+                  onKeyPress={this.handleKeyPress}
+                />
+              </div>
               <div className="waves-effect waves-light btn"
                 onClick={this.handleLogin}>로그인</div>
             </div>
@@ -109,7 +107,39 @@ class Authentication extends Component {
         <div className="card">
           <div className="card-content">
             <div className="row">
-              {inputBoxes}
+              <p>회원가입</p>
+              <div className="input-field email">
+                <label>email</label>
+                <input
+                  name="email"
+                  type="text"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                  autoFocus={true}
+                />
+              </div>
+              <div className="input-field email">
+                <label>username</label>
+                <input
+                  name="username"
+                  type="text"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value={this.state.username}
+                />
+              </div>
+              <div className="input-field">
+                <label>Password</label>
+                <input
+                  name="password"
+                  type="password"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value={this.state.password}
+                  onKeyPress={this.handleKeyPress}
+                />
+              </div>
               <div className="waves-effect waves-light btn"
                 onClick={this.handleRegister}>가입</div>
             </div>
@@ -141,7 +171,7 @@ Authentication.propTypes = {
 
 Authentication.defaultProps = {
   mode: true,
-  onRegister: (id, pw) => { console.error("register function is not defined") },
+  onRegister: (id, pw, name) => { console.error("register function is not defined") },
   onLogin: (id, pw) => { console.error("login function is not defined") }
 };
 

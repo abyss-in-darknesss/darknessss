@@ -6,27 +6,20 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
-  AUTH_GET_STATUS,
-  AUTH_GET_STATUS_SUCCESS,
-  AUTH_GET_STATUS_FAILURE
+  AUTH_LOGOUT
 } from './ActionTypes';
 
 const REGISTER_URL = '/api/auth/signup'
 const LOGIN_URL = '/api/auth/user/signin'
-const GET_STATUS_URL = '/api/auth/getInfo'
+const LOGOUT_URL = '/api/auth/user/logout'
 
 /* REGISTER */
-/*
-    ACCOUNT SIGNUP: POST /api/auth/signup
-    BODY SAMPLE: { "id": "test", "password": "test" }
-    ERROR CODES:
-*/
-export function registerRequest(email, password) {
+export function registerRequest(email, password, username) {
   return (dispatch) => {
     // Inform Register API Starting
     dispatch(register());
 
-    return axios.post(REGISTER_URL, { email, password })
+    return axios.post(REGISTER_URL, { email, password, username })
       .then((response) => {
         dispatch(registerSuccess());
       }).catch((error) => {
@@ -52,11 +45,6 @@ export function registerFailure(error) {
 }
 
 /* LOGIN */
-/*
-    ACCOUNT LOGIN: POST /api/auth/login
-    BODY SAMPLE: { "id": "test", "password": "test" }
-    ERROR CODES:
-*/
 export function loginRequest(email, password) {
   return (dispatch) => {
     // Inform Login API is starting
@@ -66,7 +54,7 @@ export function loginRequest(email, password) {
     return axios.post(LOGIN_URL, { email, password })
       .then((response) => {
         // SUCCEED
-        dispatch(loginSuccess(email));
+        dispatch(loginSuccess(response.data.email));
       }).catch((error) => {
         // FAILED
         dispatch(loginFailure());
@@ -90,33 +78,19 @@ export function loginFailure() {
   };
 }
 
-/* GET STATUS */
-export function getStatusRequest() {
+/* Logout */
+export function logoutRequest() {
   return (dispatch) => {
-    // inform Get Status API is starting
-    dispatch(getStatus());
+      return axios.get(LOGOUT_URL)
+      .then((response) => {
+          dispatch(logout());
+      });
+  };
+}
 
-    return axios.get(GET_STATUS_URL)
-    .then((response) => {
-      dispatch(getStatusSuccess(response.data.info.username));
-    }).catch((error) => {
-      dispatch(getStatusFailure());
-    })
-  }
-}
-export function getStatus() {
+export function logout() {
   return {
-    type: AUTH_GET_STATUS
+      type: AUTH_LOGOUT
   };
 }
-export function getStatusSuccess(username) {
-  return {
-    type: AUTH_GET_STATUS_SUCCESS,
-    username
-  };
-}
-export function getStatusFailure() {
-  return {
-    type: AUTH_GET_STATUS_FAILURE
-  };
-}
+
