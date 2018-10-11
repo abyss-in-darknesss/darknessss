@@ -1,65 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-class Authentication extends Component {
-  state = {
-    email: '',
-    password: '',
-    username: ''
-  }
-
-  handleChange = (e) => {
-    const nextState = {};
-    nextState[e.target.name] = e.target.value;
-    this.setState(nextState);
-  }
-
-  handleKeyPress = (e) => {
-    if (e.charCode === 13) {
-      if (this.props.mode) {
-        this.handleLogin();
-      } else {
-        this.handleRegister();
-      }
-    }
-  }
-
-  handleRegister = () => {
-    const email = this.state.email;
-    const password = this.state.password;
-    const username = this.state.username;
-    this.props.onRegister(email, password, username).then(
-      (result) => {
-        if (!result) {
-          this.setState({
-            email: '',
-            password: '',
-            username: ''
-          })
-        }
-      }
-    );
-  }
-
-  handleLogin = () => {
-    const id = this.state.email;
-    const pw = this.state.password;
-
-    this.props.onLogin(id, pw).then(
-      (success) => {
-        if (!success) {
-          this.setState({
-            email: '',
-            password: '',
-          });
-        }
-      }
-    );
-  }
-
-  render() {
-    const loginView = (
+const Authentication = ({
+  mode,
+  email,
+  password,
+  username,
+  handleChange,
+  handleKeyPress,
+  handleLogin,
+  handleRegister
+}) => (
+  <div className="container auth">
+    <Link className="logo" to="/">EF</Link>
+    {mode ?
+    // Login View
       <>
         <div className="card">
           <div className="card-content">
@@ -71,8 +27,8 @@ class Authentication extends Component {
                   name="email"
                   type="text"
                   className="validate"
-                  onChange={this.handleChange}
-                  value={this.state.email}
+                  onChange={handleChange}
+                  value={email}
                   autoFocus={true}
                 />
               </div>
@@ -82,13 +38,13 @@ class Authentication extends Component {
                   name="password"
                   type="password"
                   className="validate"
-                  onChange={this.handleChange}
-                  value={this.state.password}
-                  onKeyPress={this.handleKeyPress}
+                  onChange={handleChange}
+                  value={password}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
               <div className="waves-effect waves-light btn"
-                onClick={this.handleLogin}>로그인</div>
+                onClick={handleLogin}>로그인</div>
             </div>
           </div>
         </div>
@@ -99,10 +55,9 @@ class Authentication extends Component {
             </div>
           </div>
         </div>
-      </>
-    );
+      </> :
 
-    const registerView = (
+      // Logout View
       <>
         <div className="card">
           <div className="card-content">
@@ -114,8 +69,8 @@ class Authentication extends Component {
                   name="email"
                   type="text"
                   className="validate"
-                  onChange={this.handleChange}
-                  value={this.state.email}
+                  onChange={handleChange}
+                  value={email}
                   autoFocus={true}
                 />
               </div>
@@ -125,8 +80,8 @@ class Authentication extends Component {
                   name="username"
                   type="text"
                   className="validate"
-                  onChange={this.handleChange}
-                  value={this.state.username}
+                  onChange={handleChange}
+                  value={username}
                 />
               </div>
               <div className="input-field">
@@ -135,13 +90,13 @@ class Authentication extends Component {
                   name="password"
                   type="password"
                   className="validate"
-                  onChange={this.handleChange}
-                  value={this.state.password}
-                  onKeyPress={this.handleKeyPress}
+                  onChange={handleChange}
+                  value={password}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
               <div className="waves-effect waves-light btn"
-                onClick={this.handleRegister}>가입</div>
+                onClick={handleRegister}>가입</div>
             </div>
           </div>
         </div>
@@ -152,27 +107,31 @@ class Authentication extends Component {
             </div>
           </div>
         </div>
-      </>
-    );
-    return (
-      <div className="container auth">
-        <Link className="logo" to="/">EF</Link>
-        {this.props.mode ? loginView : registerView}
-      </div>
-    );
-  }
-}
+      </>}
+  </div>
+);
+
 
 Authentication.propTypes = {
   mode: PropTypes.bool,
-  onRegister: PropTypes.func,
-  onLogin: PropTypes.func
+  email: PropTypes.string,
+  password: PropTypes.string,
+  username: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleKeyPress: PropTypes.func,
+  handleLogin: PropTypes.func,
+  handleRegister: PropTypes.func
 };
 
 Authentication.defaultProps = {
   mode: true,
-  onRegister: (id, pw, name) => { console.error("register function is not defined") },
-  onLogin: (id, pw) => { console.error("login function is not defined") }
+  email: '',
+  password: '',
+  username: '',
+  handleChange: (e) => { console.log('change function is not defined')},
+  handleKeyPress: (e) => { console.log('key-press function is not defined')},
+  handleLogin: (id, pw) => { console.error("login function is not defined") },
+  handleRegister: (id, pw, name) => { console.error("register function is not defined") },
 };
 
 export default Authentication;

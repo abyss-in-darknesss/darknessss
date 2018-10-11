@@ -4,13 +4,34 @@ import { connect } from 'react-redux';
 import { registerRequest } from 'actions/authentication';
 
 class Register extends Component {
-  handleRegister = (id, pw) => {
-    return this.props.registerRequest(id, pw).then(
+  state = {
+    email: '',
+    password: '',
+    username: ''
+  }
+
+  handleChange = (e) => {
+    const nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  }
+
+  handleKeyPress = (e) => {
+    if (e.charCode === 13) 
+        this.handleRegister();
+  }
+  
+  handleRegister = () => {
+    
+    const email = this.state.email;
+    const password = this.state.password;
+    const username = this.state.username;
+    
+    this.props.registerRequest(email, password, username).then(
       () => {
         if(this.props.status === "SUCCESS") {
           alert('회원가입이 완료되었습니다!' );
           this.props.history.push('/login');
-          return true;
         }else {
           /*
               ERROR CODES:
@@ -24,8 +45,12 @@ class Register extends Component {
             'Username already exists'
           ];
 
+          this.setState({
+            email: '',
+            password: '',
+            username: ''
+          })
           alert(errorMessage[this.props.errorCode - 1]);
-          return false;
         }
       }
     )
@@ -34,8 +59,14 @@ class Register extends Component {
   render() {
     return (
       <>
-        <Authentication mode={false}
-          onRegister={this.handleRegister} />
+        <Authentication
+          mode={false}
+          email={this.state.email}
+          password={this.state.password}
+          username={this.state.username}
+          handleChange={this.handleChange}
+          handleKeyPress={this.handleKeyPress}
+          handleRegister={this.handleRegister} />
       </>
     );
   }

@@ -2,27 +2,40 @@ import React, { Component } from 'react';
 import { Authentication } from 'components';
 import { connect } from 'react-redux';
 import { loginRequest } from 'actions/authentication';
+import * as auth from 'lib/auth';
 
 class Login extends Component {
+  state = {
+    email: '',
+    password: ''
+  }
+  handleChange = (e) => {
+    const nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  }
 
-  handleLogin = (id, pw) => {
-    return this.props.loginRequest(id, pw).then(
+  handleKeyPress = (e) => {
+    if (e.charCode === 13) this.handleLogin();
+  }
+
+  handleLogin = () => {
+    const email = this.state.email;
+    const password = this.state.password;
+
+    this.props.loginRequest(email, password).then(
       () => {
         if(this.props.status === "SUCCESS") {
-          // create session data
-          const loginData = {
+          auth.createCookie('key', {
             isLoggedIn: true,
-            currentUser: id
-          }
-
-          document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-
-          alert('로그인이 완료되었습니다')
+            currentUser: email
+          });
           this.props.history.push('/');
-          return true;
         }else {
-          alert('아이디 또는 비밀번호가 올바르지 않습니다.')
-          return false;
+          this.setState({
+            email: '',
+            password: '',
+          });
         }
       }
     )
@@ -31,8 +44,13 @@ class Login extends Component {
   render() {
     return (
       <>
-        <Authentication mode={true}
-          onLogin={this.handleLogin}/>
+        <Authentication 
+          mode={true}
+          email={this.state.email}
+          password={this.state.password}
+          handleChange={this.handleChange}
+          handleKeyPress={this.handleKeyPress}
+          handleLogin={this.handleLogin} />
       </>
     )
   }
