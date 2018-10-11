@@ -81,8 +81,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    registerRequest: (id, pw) => {
-      return dispatch(registerRequest(id, pw));
+    registerRequest: (id, pw, username) => {
+      return dispatch(registerRequest(id, pw, username));
     }
   };
 };

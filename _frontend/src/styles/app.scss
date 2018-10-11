@@ -40,8 +40,8 @@ header{
         justify-content: center;
         align-items: center;
         #nav-username{
-          height: 1rem;
           width: 100px;
+          line-height: 1rem;
           margin-left: $default-margin;
           background-color: $body-bg;
         }
@@ -108,6 +108,8 @@ header{
         bottom: 0;
         opacity: 0;
         transition: $animate;
+        display: flex;
+        justify-content: left;
       }
       &:hover{
         .article-info{

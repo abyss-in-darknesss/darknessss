@@ -6,21 +6,24 @@ import {
   AUTH_LOGIN,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
-  AUTH_LOGOUT
+  AUTH_LOGOUT,
+  AUTH_GET_STATUS
 } from './ActionTypes';
 
-const REGISTER_URL = '/api/auth/signup'
+const REGISTER_URL = '/api/auth/user/signup'
 const LOGIN_URL = '/api/auth/user/signin'
 const LOGOUT_URL = '/api/auth/user/logout'
 
 /* REGISTER */
 export function registerRequest(email, password, username) {
+  console.log(email)
+  console.log(username);
   return (dispatch) => {
     // Inform Register API Starting
     dispatch(register());
-
     return axios.post(REGISTER_URL, { email, password, username })
       .then((response) => {
+        console.log(response);
         dispatch(registerSuccess());
       }).catch((error) => {
         dispatch(registerFailure(error.response.data.code))
@@ -78,7 +81,15 @@ export function loginFailure() {
   };
 }
 
-/* Logout */
+/* GET STATUS */
+export function getStatus(username) {
+  return {
+    type: AUTH_GET_STATUS,
+    username
+  }
+}
+
+/* LOGOUT */
 export function logoutRequest() {
   return (dispatch) => {
       return axios.get(LOGOUT_URL)

@@ -8,15 +8,7 @@ import  PropTypes from 'prop-types';
   <li><a class="waves-effect waves-light btn" href="<?php echo _URL?>member/logout">로그아웃</a></li>
 */
 
-const loginBtn = (
-  <li><Link to="login" className="waves-effect waves-light btn">로그인</Link></li>
-)
-
-const logoutBtn = (
-  <li><Link to="#" className="waves-effect waves-light btn">로그아웃</Link></li>
-)
-
-const Header = ({ handleNav, isSideNav, isLoggedIn, username }) => (
+const Header = ({ handleNav, isSideNav, isLoggedIn, username, onLogout }) => (
   <header style={{width:`${isSideNav ? '250px' : '0'}`}}>
     <nav id="gnb">
       <div id="logo">
@@ -26,7 +18,13 @@ const Header = ({ handleNav, isSideNav, isLoggedIn, username }) => (
         <Link to="/">EF</Link>
       </div>
       <ul id="gnb-button-group">
-        {isLoggedIn ? logoutBtn : loginBtn}
+        {isLoggedIn ? 
+          <li>
+            <span onClick={onLogout} className="waves-effect waves-light btn">로그아웃</span>
+          </li> : 
+          <li>
+            <Link to="login" className="waves-effect waves-light btn">로그인</Link>
+          </li>}
       </ul>
     </nav>
     <ul className="sidenav" style={{display:`${isSideNav ? 'block' : 'none'}`}}>
