@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Uploader } from 'components'
+import { Submit } from 'components'
 import * as verify from 'lib/verify';
 
 const imageMaxSize = 100000; // bytes
@@ -29,7 +29,7 @@ class Write extends Component {
   render() {
     return(
       <>
-        <Uploader
+        <Submit
           files={this.state.files}
           handleOnDrop={this.handleOnDrop}
           imageMaxSize={imageMaxSize}

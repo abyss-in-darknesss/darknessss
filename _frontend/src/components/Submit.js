@@ -2,7 +2,7 @@ import React from 'react';
 
 import Dropzone from 'react-dropzone';
 
-const Uploader = ({
+const Submit = ({
   files,
   handleOnDrop,
   imageMaxSize,
@@ -39,4 +39,4 @@ const Uploader = ({
   </>
 )
 
-export default Uploader;
+export default Submit;
