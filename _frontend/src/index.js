@@ -4,7 +4,7 @@ import * as serviceWorker from './serviceWorker';
 
 import 'styles/app.scss';
 
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
@@ -19,12 +19,12 @@ ReactDOM.render(
     <Router>
       <>
         <Route path="/" component={App} />
-        <Switch>
-          <Route path="/register" component={Register}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/write" component={Write}/>
-          <Route path="/" component={Home}/>
-        </Switch>
+        <div className="content">
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/write" component={Write}/>
+          <Route exact path="/" component={Home}/>
+        </div>
       </>
     </Router>
   </Provider>,

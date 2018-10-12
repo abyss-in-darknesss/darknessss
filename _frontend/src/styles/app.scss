@@ -4,6 +4,35 @@
 
 // Variables
 @import 'variables';
+@import 'write';
+
+/* init */
+i{
+  color: #000;
+}
+// label focus color
+.input-field input:focus + label,
+.input-field textarea:focus + label{
+  color: $color-1 !important; 
+}
+// label underline focus color
+.input-field input:focus,
+.input-field textarea:focus{
+  border-bottom: 1px solid $color-1 !important;
+  box-shadow: 0 1px 0 0 $color-2 !important;
+}
+// btn bgColor
+.btn{
+  margin: 0 0 0 0;
+  background-color: $color-1;
+  &:hover{
+    background-color: $color-2;
+  }
+}
+.user-img-0{
+  width: 50px;
+  height: 50px;
+}
 
 html, body {
   margin: 0;
@@ -79,7 +108,9 @@ header{
 .content{
   flex: 1;
   display: flex;
-  margin-top: $header-height+$default-margin;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: $header-height+$default-margin;
   .item-list{
     flex: 1;
     margin: 0 $default-margin;
@@ -119,10 +150,15 @@ header{
     }
   }
 }
-
+.container{
+  margin-top: -($header-height+$default-margin);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .auth {
   width: $item-width*.9;
-  margin: 15vh auto;
   text-align: center;
   a.logo {
       text-align: center;
@@ -139,14 +175,9 @@ header{
       color: $gray;
   }
   .card {
-    margin: $default-margin -5px auto;
+    width: 100%;
     .row {
       margin: $default-margin*1.5;
-      p {
-        font-size: 32px;
-        color: $gray;
-        margin-bottom: $default-margin*2;
-      }
       .email {
         margin-top: 0px;
       }
