@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Submit } from 'components'
+import { Submit } from 'components';
+import { produce } from 'immer';
 import * as verify from 'lib/verify';
 
 const imageMaxSize = 100000; // bytes
