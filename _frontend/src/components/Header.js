@@ -37,8 +37,8 @@ const Header = ({ handleNav, isSideNav, isLoggedIn, username, onLogout }) => (
         </div>
       </li>
       <ul>
-          <li><Link to="#"><i className="material-icons">edit</i>글쓰기</Link></li>
-          <li><Link to="#"><i className="material-icons">settings</i>설정</Link></li>
+          <li><Link to="/write"><i className="material-icons">edit</i>글쓰기</Link></li>
+          <li><Link to="/setting"><i className="material-icons">settings</i>설정</Link></li>
         </ul>
       <div className="divider"></div>
       <li>
