@@ -6,14 +6,12 @@ import { ItemList } from 'components';
 class Home extends Component {
 
   componentDidMount() {
-    this.props.memoListRequest();
+    this.props.articleListRequest()
   }
 
   render() {
     return(
-        <ItemList
-          data={this.props.articleData}
-        />
+        <ItemList data={this.props.articleData}/>
     )
   }
 }

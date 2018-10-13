@@ -13,6 +13,10 @@ const initialState = {
     data: [],
     isLast: false
   },
+  article: {
+    status: 'INIT',
+    data: [],
+  },
   edit: {
     status: 'INIT',
     error: -1,
@@ -53,6 +57,7 @@ export default function article(state = initialState, action) {
       return produce(state, draft => {
         draft.list = {
           status:'WAITING',
+          data: []
         }
       });
     case types.ARTICLE_LIST_SUCCESS:
@@ -65,7 +70,30 @@ export default function article(state = initialState, action) {
       });
     case types.ARTICLE_LIST_FAILURE:
       return produce(state, draft => {
+        
         draft.list = {
+          status:'FAILURE',
+          error: action.error
+        }
+      });
+    case types.ARTICLE:
+      return produce(state, draft => {
+        draft.article = {
+          status:'WAITING',
+          data: []
+        }
+      });
+    case types.ARTICLE_SUCCESS:
+      return produce(state, draft => {
+        draft.article = {
+          status:'SUCCESS',
+          data: action.data,
+        }
+      });
+    case types.ARTICLE_FAILURE:
+      return produce(state, draft => {
+        
+        draft.article = {
           status:'FAILURE',
           error: action.error
         }

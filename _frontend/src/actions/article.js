@@ -5,6 +5,9 @@ import {
   ARTICLE_LIST,
   ARTICLE_LIST_SUCCESS,
   ARTICLE_LIST_FAILURE,
+  ARTICLE,
+  ARTICLE_SUCCESS,
+  ARTICLE_FAILURE,
 } from './ActionTypes';
 import axios from 'axios';
 
@@ -52,6 +55,7 @@ export function articleListRequest() {
       return axios.get(LIST_URL)
       .then((response) => {
           dispatch(articleListSuccess(response.data));
+          console.log(response.data)
       }).catch((error) => {
           dispatch(articleListFailure());
       });
@@ -74,5 +78,39 @@ export function articleListSuccess(data) {
 export function articleListFailure() {
   return {
       type: ARTICLE_LIST_FAILURE
+  };
+}
+
+/* ARTICLE GET */
+export function articleRequest(index) {
+  return (dispatch) => {
+      // inform memo list API is starting
+      dispatch(article());
+      
+      return axios.get(ARITLCLE_URL+index)
+      .then((response) => {
+          dispatch(articleSuccess(response.data));
+      }).catch((error) => {
+          dispatch(articleFailure());
+      });
+  };
+}
+
+export function article() {
+  return {
+      type: ARTICLE
+  };
+}
+
+export function articleSuccess(data) {
+  return {
+      type: ARTICLE_SUCCESS,
+      data,
+  };
+}
+
+export function articleFailure() {
+  return {
+      type: ARTICLE_FAILURE
   };
 }
