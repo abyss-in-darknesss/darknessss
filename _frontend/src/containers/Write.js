@@ -11,16 +11,30 @@ const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/
 class Write extends Component {
 
   state = {
-    bioHeight: 3.6,
     files: [],
     title: '',
-    bio: ''
+    bio: '',
+    imgSrc:[]
   }
 
   handleChange = (e) => {
     const nextState = {};
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
+  }
+
+  handleDelete = (e) => {
+    const idx = e.target.name;
+    console.log(idx);
+    const state = this.state
+    this.setState(
+      produce(state, draft => {
+        draft.files.splice(idx, 1, "deleted");
+      })
+    )
+    e.target.style.backgroundColor = '#000';
+    e.target.style.opacity='0.4';
+    
   }
 
   handleOnDrop = (files, rejectedFiles) => {
@@ -30,14 +44,16 @@ class Write extends Component {
       const isVerified = verify.file(files, imageMaxSize, acceptedFileTypes);
       
       if (isVerified) {
-        produce(this.state, draft => {
-          draft.files.concat(files);
-        })
-        this.setState({
-          files: this.state.files.concat(files)
-        })
-        
-        console.log(this.state.files);
+        const state = this.state
+        this.setState(
+          produce(state, draft => {
+            draft.files=state.files.concat(files);
+            draft.imgSrc= state.imgSrc.concat(files.map(item => (
+              item.preview)
+            ))
+          }
+        ))
+        console.log(this.state.imgSrc);
       }
     }
   }
@@ -46,8 +62,9 @@ class Write extends Component {
     const data = new FormData();
     data.append('title', this.state.title);
     data.append('bio', this.state.bio);
-    for(let i in this.state.files){
     if(this.state.files.length > 0) {
+      for(let i in this.state.files){
+        if(this.state.files[i] !== 'deleted')
         data.append('files', this.state.files[i]);
     }
   }
@@ -71,13 +88,13 @@ class Write extends Component {
     return (
       <>
         <Post
-          files={this.state.files}
+          imgs={this.state.imgSrc}
           title={this.state.title}
           bio={this.state.bio}
           onPost={this.handlePost} 
           handleOnDrop={this.handleOnDrop}
           handleChange={this.handleChange}
-          handleKeyPress={this.handleKeyPress}
+          handleDelete={this.handleDelete}
           imageMaxSize={imageMaxSize}
           acceptedFileTypes={acceptedFileTypes}/>
       </>

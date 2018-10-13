@@ -3,13 +3,13 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 
 const Post = ({
-  files,
+  imgs,
   title,
   bio,
   onPost,
   handleOnDrop,
   handleChange,
-  handleKeyPress,
+  handleDelete,
   imageMaxSize,
   acceptedFileTypes
 }) => (
@@ -21,17 +21,25 @@ const Post = ({
       accept={acceptedFileTypes}
       className='dropzone'>
       <p>이곳으로 이미지를 드래그해주세요.</p>
+      <p>이미지를 클릭하면 삭제합니다.</p>
       <p>지원되는 파일 형식: png, jpg, gif</p>
     </Dropzone>
     <article id="write">
-      {files !== null ? files.map((item, i) => (
-        <div key={i} style={{ width: '300px', height: '300px' }}>
+    <div id="post-imgs">
+    {console.log(imgs)}
+      {imgs.length > 0 ? imgs.map((item, i) => (
+        <div className="img" key={i} style={{width: '300px', height: '200px', backgroundColor:'#000'}}
+        >
           <img
             alt=''
-            src={item.preview}
-            style={{ width: '300px', height: '300px' }} />
+            src={item}
+            style={{ width: '300px', height: '200px' }}
+            name={i}
+        onClick={handleDelete} 
+            />
         </div>
       )) : ''}
+      </div>
       <div className="card">
         <div className="input title">
           <input
@@ -48,7 +56,6 @@ const Post = ({
             name="bio"
             placeholder="설명"
             onChange={handleChange}
-            onKeyPress={handleKeyPress}
             value={bio}
           />
         </div>

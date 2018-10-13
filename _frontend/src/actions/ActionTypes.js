@@ -12,7 +12,12 @@ export const AUTH_GET_STATUS = "AUTH_GET_STATUS";
 // Logout
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-// Write
+/* ARTICLE CRUD */
+// Create
 export const ARTICLE_POST = "ARTICLE_POST";
 export const ARTICLE_POST_SUCCESS = "ARTICLE_POST_SUCCESS";
 export const ARTICLE_POST_FAILURE = "ARTICLE_POST_FAILURE";
+// Retrieve
+export const ARTICLE_LIST = "ARTICLE_LIST";
+export const ARTICLE_LIST_SUCCESS = "ARTICLE_LIST_SUCCESS";
+export const ARTICLE_LIST_FAILURE = "ARTICLE_LIST_FAILURE";
