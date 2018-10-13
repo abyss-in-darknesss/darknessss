@@ -90,9 +90,11 @@ export const signup = async (req, res) => {
         username: body.username
       })
     });
+    console.log(status);
     return res.json(status.toJSON());
   }else {
     status = status.set('success', false);
+    console.log(status);
     return res.json(status.toJSON());
   }
   

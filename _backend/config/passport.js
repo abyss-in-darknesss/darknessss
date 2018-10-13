@@ -5,11 +5,11 @@ import * as bcrypt from '../lib/bcrypt';
 
 module.exports = () => {
   passport.serializeUser((user, done) => { // Strategy 성공 시 호출됨
-    done(null, user.email); // 여기의 user가 deserializeUser의 첫 번째 매개변수로 이동
+    done(null, user.id); // 여기의 user가 deserializeUser의 첫 번째 매개변수로 이동
   });
 
-  passport.deserializeUser((email, done) => { // 매개변수 user는 serializeUser의 done의 인자 user를 받은 것// 여기의 user가 req.user가 됨
-    done(null, email);
+  passport.deserializeUser((id, done) => { // 매개변수 user는 serializeUser의 done의 인자 user를 받은 것// 여기의 user가 req.user가 됨
+    done(null, id);
   });
 
   passport.use(new LocalStrategy({
