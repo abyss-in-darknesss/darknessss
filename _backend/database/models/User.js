@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 import db from '../db';
-import UserProfile from './UserProfile';
+import { UserProfile, Post } from '../models';
 
 const User = db.define('user', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
     primaryKey: true,
-    autoIncrement: true,
+    defaultValue: Sequelize.UUIDV4,
   },
   email: {
     type: Sequelize.STRING,
@@ -17,9 +17,12 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
   }
+}, {
+  underscored:true
 });
 
 User.associate = function () {
+  User.hasMany(Post);
   User.hasOne(UserProfile, {foreignKey: 'user_id', onDelete: 'CASCADE'});
 }
 

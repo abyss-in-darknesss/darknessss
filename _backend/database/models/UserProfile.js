@@ -1,14 +1,15 @@
 import Sequelize from 'sequelize';
 import db from '../db';
+import { User } from '../models';
 
 const UserProfile = db.define('user_profile', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
     primaryKey: true,
-    autoIncrement: true,
+    defaultValue: Sequelize.UUIDV4,
   },
   user_id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
   },
   username: {
     type: Sequelize.STRING,
@@ -21,6 +22,9 @@ const UserProfile = db.define('user_profile', {
   }
 }, {
   timestamps: false,
+  underscored: true,
 });
-
+// UserProfile.associate = function() {
+//   UserProfile.hasOne(User);
+// }
 export default UserProfile;
