@@ -19,8 +19,7 @@ export function registerRequest(email, password, username) {
   return (dispatch) => {
     // Inform Register API Starting
     dispatch(register());
-    return axios.post(REGISTER_URL, { email, password, username },
-      {headers: {'content-type': 'multipart/form-data'}})
+    return axios.post(REGISTER_URL, { email, password, username })
       .then((response) => {
         dispatch(registerSuccess());
       }).catch((error) => {

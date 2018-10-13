@@ -26,7 +26,6 @@ const Post = ({
     </Dropzone>
     <article id="write">
     <div id="post-imgs">
-    {console.log(imgs)}
       {imgs.length > 0 ? imgs.map((item, i) => (
         <div className="img" key={i} style={{width: '300px', height: '200px', backgroundColor:'#000'}}
         >

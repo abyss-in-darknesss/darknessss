@@ -10,7 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 
-import { App, Home, Register, Login, Write } from './containers';
+import { App, Home, Register, Login, Write, Article } from './containers';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -20,9 +20,10 @@ ReactDOM.render(
       <>
         <Route path="/" component={App} />
         <div className="content">
-          <Route exact path="/register" component={Register}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/write" component={Write}/>
+          <Route path="/register" component={Register}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/write" component={Write}/>
+          <Route path="/article/:index" component={Article}/>
           <Route exact path="/" component={Home}/>
         </div>
       </>
