@@ -1,3 +1,2 @@
-const test = 1;
-
-export default test;
+export { default as upload } from './upload';
+export { default as isLogin } from './isLogin';

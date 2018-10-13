@@ -22,6 +22,8 @@ export const signin = async (req, res) => {
 }
 export const logout = (req, res) => {
   req.logout();
+  console.log(req.user);
+
   res.status(200).json({
     success: true,
     message: "로그아웃이 성공했습니다."
@@ -90,7 +92,6 @@ export const signup = async (req, res) => {
         username: body.username
       })
     });
-    console.log(status);
     return res.json(status.toJSON());
   }else {
     status = status.set('success', false);

@@ -39,11 +39,13 @@ app.use(cors());
 // set path
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.get('*', (req, res) => {
+//   res.render('index');
+// });
+
 // set route
 app.use('/', routes);
 
-app.get('*', (req, res) => {
-  res.render('index');
-});
+
 
 module.exports = app;

@@ -18,6 +18,8 @@ const PostImg = db.define('post_img', {
 }, {
   timestamps: false,
   underscored: true,
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 });
 PostImg.associate = function() {
   PostImg.hasOne(Post);
