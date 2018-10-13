@@ -110,6 +110,7 @@ header{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding-top: $header-height+$default-margin;
   .item-list{
     flex: 1;

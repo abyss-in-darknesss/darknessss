@@ -10,20 +10,18 @@ import {
   AUTH_GET_STATUS
 } from './ActionTypes';
 
-const REGISTER_URL = '/api/auth/user/signup'
-const LOGIN_URL = '/api/auth/user/signin'
-const LOGOUT_URL = '/api/auth/user/logout'
+const REGISTER_URL = '/api/user/signup'
+const LOGIN_URL = '/api/user/signin'
+const LOGOUT_URL = '/api/user/logout'
 
 /* REGISTER */
 export function registerRequest(email, password, username) {
-  console.log(email)
-  console.log(username);
   return (dispatch) => {
     // Inform Register API Starting
     dispatch(register());
-    return axios.post(REGISTER_URL, { email, password, username })
+    return axios.post(REGISTER_URL, { email, password, username },
+      {headers: {'content-type': 'multipart/form-data'}})
       .then((response) => {
-        console.log(response);
         dispatch(registerSuccess());
       }).catch((error) => {
         dispatch(registerFailure(error.response.data.code))
