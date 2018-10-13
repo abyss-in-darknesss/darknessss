@@ -18,7 +18,10 @@ const User = db.define('user', {
     allowNull: false,
   }
 }, {
-  underscored:true
+  underscored:true,
+  underscored: true,
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 });
 
 User.associate = function () {

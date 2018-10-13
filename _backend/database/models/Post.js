@@ -28,6 +28,8 @@ const Post = db.define('post', {
 }, {
   timestamps: true,
   underscored: true,
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 });
 
 Post.associate = function() {

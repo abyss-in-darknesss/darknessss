@@ -14,6 +14,8 @@ const Tag = db.define('tag', {
 }, {
   timestamps: false,
   underscored: true,
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 });
 
 export default Tag;

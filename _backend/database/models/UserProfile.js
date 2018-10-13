@@ -23,6 +23,8 @@ const UserProfile = db.define('user_profile', {
 }, {
   timestamps: false,
   underscored: true,
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 });
 // UserProfile.associate = function() {
 //   UserProfile.hasOne(User);

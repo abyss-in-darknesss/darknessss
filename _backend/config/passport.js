@@ -31,7 +31,7 @@ module.exports = () => {
       ).then(
         compared => {
           if(!compared) throw new Error('비밀번호가 맞지 않습니다.');
-          return done(null, _user);
+          return done(null, _user.dataValues);
         }
       ).catch(
         error => {

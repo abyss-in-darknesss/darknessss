@@ -17,6 +17,8 @@ const PostTag = db.define('post_tag', {
 }, {
   timestamps: false,
   underscored:true,
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 });
 
 PostTag.associate = function() {
