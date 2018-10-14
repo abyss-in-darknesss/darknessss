@@ -4,7 +4,6 @@
 
 // Variables
 @import 'variables';
-@import 'materialize';
 @import 'write';
 
 /* init */
@@ -73,7 +72,6 @@ header{
           width: 100px;
           line-height: 1rem;
           margin-left: $default-margin;
-          background-color: $body-bg;
         }
       }
     }
