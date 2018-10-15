@@ -46,7 +46,7 @@ export const getPostsAll = async (req, res) => {
   const query = req.query;
 
   await Post.findAll({
-    limit: 2,
+    limit: 12,
     include: [{
         model: PostImg,
         attributes: ['img_url']

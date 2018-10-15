@@ -1,6 +1,5 @@
 import express from 'express';
 import * as postCtrl from './post.ctrl';
-import passport from 'passport';
 import { upload, isLogin } from '../../../middleware';
 
 const router = express.Router();

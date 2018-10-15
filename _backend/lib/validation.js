@@ -10,8 +10,8 @@ export const isPassword = (password) => {
   return regexp.test(password);
 }
 
-// 디스플레이네임 유효 검사
-export const isUserName = (displayName) => {
-  const regexp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/igm;
+// 유저네임 유효 검사
+export const isUserName = (userName) => {
+  const regexp = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{2,29}$/igm;
   return regexp.test(displayName);
 }
